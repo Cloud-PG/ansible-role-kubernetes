@@ -1,14 +1,10 @@
 - name: sysctl-system
   command: sysctl --system
 
-- name: reload kubelet
-  systemd:
-    name: kubelet
-    state: reloaded
-
 - name: restart kubelet
   service:
     name: kubelet
+    daemon_reload: yes
     state: restarted
 
 - name: kill kubeapi
