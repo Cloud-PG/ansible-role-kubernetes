@@ -2,7 +2,7 @@
   command: sysctl --system
 
 - name: reload kubelet
-  service:
+  systemd:
     name: kubelet
     state: reloaded
 
