@@ -7,6 +7,13 @@
 - name: Add node to kube cluster
   command: kubeadm join --token {{kube_token}} {{kube_server}}:6443 --discovery-token-unsafe-skip-ca-verification creates=/etc/kubernetes/kubelet.conf
 
+- name: sleep for 300 seconds and continue with play
+  wait_for:
+    timeout: 300
+  delegate_to: localhost
+  notify: 
+  - restart kubelet
+
 - name: Add KUBELET_EXTRA_ARGS
   lineinfile:
     dest: /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
