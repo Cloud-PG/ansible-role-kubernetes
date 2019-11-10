@@ -142,3 +142,9 @@
 
 - include: nfs-client.yaml
   when: kube_install_nfs_client
+
+- name: Reset iptables to blank slate
+  command: "{{item}}"
+  with_items:
+    - 'iptables -F'
+    - 'iptables-save'
