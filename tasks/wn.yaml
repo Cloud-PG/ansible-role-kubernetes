@@ -13,12 +13,18 @@
     - 'iptables -F'
     - 'iptables-save'
 
-- name: wait for 20min and restart kubelet
+- name: wait for /etc/cni/net.d/10-flannel.conflist and restart kubelet
   wait_for:
-    timeout: 1200
+    path: /etc/cni/net.d/10-flannel.conflist
+    search_regex: flannel 
+    timeout: 3600
   delegate_to: localhost
-  notify: 
-  - restart kubelet
+
+- name: restart kubelet
+  service:
+    name: kubelet
+    daemon_reload: yes
+    state: restarted
 
 - name: Add KUBELET_EXTRA_ARGS
   lineinfile:
