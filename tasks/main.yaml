@@ -8,10 +8,3 @@
 
 - name: Include "{{kube_type_of_node}}" tasks
   include: "{{kube_type_of_node}}.yaml"
-
-- name: sleep for 300 seconds and restart kubelet
-  wait_for:
-    timeout: 600
-  delegate_to: localhost
-  notify: 
-  - restart kubelet

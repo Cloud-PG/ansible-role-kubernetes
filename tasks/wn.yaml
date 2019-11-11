@@ -13,6 +13,15 @@
     - 'iptables -F'
     - 'iptables-save'
 
+- name: wait for /etc/cni/net.d/*.conflist and restart kubelet
+  wait_for:
+    path: /etc/cni/net.d/*.conflist
+    state: present
+    timeout: 3600
+  delegate_to: localhost
+  notify: 
+  - restart kubelet
+
 - name: Add KUBELET_EXTRA_ARGS
   lineinfile:
     dest: /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
