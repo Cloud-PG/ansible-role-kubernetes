@@ -16,7 +16,7 @@
 - name: wait for /etc/cni/net.d/10-flannel.conflist and restart kubelet
   wait_for:
     path: /etc/cni/net.d/10-flannel.conflist
-    state: present
+    search_regex: flannel 
     timeout: 3600
   delegate_to: localhost
   notify: 
