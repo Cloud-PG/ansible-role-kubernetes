@@ -4,8 +4,13 @@
     path: /etc/profile.d/kube.sh
   delegate_to: "{{kube_server}}"
 
-- name: Add node to kube cluster
+- name: Add node to kube cluster with node_name == {{ node_name }}
+  command: kubeadm join --node-name {{ node_name }} --token {{kube_token}} {{kube_server}}:6443 --discovery-token-unsafe-skip-ca-verification creates=/etc/kubernetes/kubelet.conf
+  when: node_name is defined
+
+- name: Add node to kube cluster with node_name == {{ node_name }}
   command: kubeadm join --token {{kube_token}} {{kube_server}}:6443 --discovery-token-unsafe-skip-ca-verification creates=/etc/kubernetes/kubelet.conf
+  when: node_name is undefined
 
 - name: Reset iptables to blank slate
   command: "{{item}}"
