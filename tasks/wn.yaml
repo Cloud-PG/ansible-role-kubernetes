@@ -6,11 +6,11 @@
 
 - name: Add node to kube cluster with node_name == {{ node_name }}
   command: kubeadm join --node-name {{ node_name }} --token {{kube_token}} {{kube_server}}:6443 --discovery-token-unsafe-skip-ca-verification creates=/etc/kubernetes/kubelet.conf
-  when: node_name is defined
+  when: node_name  != "AUTO"
 
 - name: Add node to kube cluster with node_name == {{ node_name }}
   command: kubeadm join --token {{kube_token}} {{kube_server}}:6443 --discovery-token-unsafe-skip-ca-verification creates=/etc/kubernetes/kubelet.conf
-  when: node_name is undefined
+  when: node_name == "AUTO"
 
 - name: Reset iptables to blank slate
   command: "{{item}}"

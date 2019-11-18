@@ -48,3 +48,5 @@ kube_nfs_path: /pv
 kube_nfs_server: kubeserver.localdomain
 # Extra options for the flannel plugin
 kube_flanneld_extra_args: []
+
+node_name: AUTO
