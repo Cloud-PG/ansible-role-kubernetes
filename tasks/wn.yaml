@@ -13,16 +13,6 @@
     - 'iptables -F'
     - 'iptables-save'
 
-- name: wait 5min for flannel and restart kubelet
-  wait_for:
-    timeout: 300
-  delegate_to: localhost
-
-- name: restart kubelet
-  service:
-    name: kubelet
-    state: restarted
-
 - name: Add KUBELET_EXTRA_ARGS
   lineinfile:
     dest: /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
@@ -32,3 +22,13 @@
   notify: 
   - restart kubelet
   when: kubelet_extra_args != ''
+
+- name: wait 5min for flannel and restart kubelet
+  wait_for:
+    timeout: 300
+  delegate_to: localhost
+
+- name: restart kubelet
+  service:
+    name: kubelet
+    state: restarted
