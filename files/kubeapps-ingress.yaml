@@ -13,5 +13,5 @@ spec:
         paths:
         - backend:
             serviceName: kubeapps
-            servicePort: 80
+            servicePort: 30080
           path: /kubeapps
