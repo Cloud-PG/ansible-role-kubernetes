@@ -14,4 +14,4 @@ spec:
       - path: /dashboard/?(.*)
         backend:
           serviceName: kubernetes-dashboard
-          servicePort: 8443
+          servicePort: 30443
