@@ -33,13 +33,13 @@ kube_apply_repos: []
 # Flag to set Metrics-Server to be installed
 kube_install_metrics: false
 # Flag to set the nginx ingress controller to be installed
-kube_install_ingress: false
+kube_install_ingress: true 
 # Flag to set add the nvidia support to the cluster
 kube_nvidia_support: false
 # Driver version to install: specific version or "latest"
 kube_nvidia_driver_version: "410"
 # Flag to set the kubeapps UI to be installed
-kube_install_kubeapps: false
+kube_install_kubeapps: true
 # Flag to set nfs-client-provisioner to be installed
 kube_install_nfs_client: false
 # NFS path used by nfs-client-provisioner
