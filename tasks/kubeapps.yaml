@@ -13,11 +13,11 @@
     ignore_errors: yes
     changed_when: false
 
-  - name: Install kubeapps
-    command: helm install --name kubeapps --namespace kubeapps bitnami/kubeapps --set 'mongodb.mongodbEnableIPv6=false'
-    when: helm_status.rc != 0
+#  - name: Install kubeapps
+#    command: helm install --name kubeapps --namespace kubeapps bitnami/kubeapps --set 'mongodb.mongodbEnableIPv6=false'   --set authProxy.enabled=true  --set authProxy.provider=oidc  --set authProxy.clientID=my-client-id.apps.googleusercontent.com --set authProxy.clientSecret=my-client-secret  --set authProxy.cookieSecret=$(echo "not-good-secret" | base64) --set authProxy.additionalFlags="{-cookie-secure=false,-oidc-issuer-url=https://accounts.google.com}"
+#    when: helm_status.rc != 0
 
-  - copy: src=kubeapps-ingress.yaml dest=/tmp/kubeapps-ingress.yaml
-  - command: kubectl apply -f /tmp/kubeapps-ingress.yaml
-    environment:
-      KUBECONFIG: /etc/kubernetes/admin.conf
+#  - copy: src=kubeapps-ingress.yaml dest=/tmp/kubeapps-ingress.yaml
+#  - command: kubectl apply -f /tmp/kubeapps-ingress.yaml
+#    environment:
+#      KUBECONFIG: /etc/kubernetes/admin.conf
