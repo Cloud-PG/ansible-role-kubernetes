@@ -6,13 +6,13 @@
 # Install HELM
 - block:
     - name: Copy helm install script
-      copy: 
-        src: helm.sh
+      get_url: 
+        url: https://git.io/get_helm.sh
         dest: /tmp/helm.sh
         mode: 0755
 
     - name: Execute helm install script
-      command: bash /tmp/helm.sh -v {{kube_install_helm_version}}
+      command: bash /tmp/helm.sh
 
     - name: Create RBAC permissions for Tiller (1)
       command: kubectl -n kube-system create sa tiller
