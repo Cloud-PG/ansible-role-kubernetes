@@ -29,9 +29,10 @@
   when: kubelet_extra_args != ''
 
 - name: wait 5min for flannel and restart kubelet
-  wait_for:
-    timeout: 300
-  delegate_to: localhost
+- shell: service kubelet status > /tmp/kubelet_check.log ; sleep 60; grep ''start to sync state" /tmp/kubelet_check.log
+  register: cmd_result
+  retries: 10
+  until: cmd_result | success
 
 - name: restart kubelet
   service:
