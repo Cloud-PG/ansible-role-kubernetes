@@ -148,6 +148,9 @@ spec:
       tolerations:
       - key: node-role.kubernetes.io/master
         effect: NoSchedule
+  selector:
+    matchLabels:
+      k8s-app: kubernetes-dashboard
 
 ---
 # ------------------- Dashboard Service ------------------- #
